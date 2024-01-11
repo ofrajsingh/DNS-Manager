@@ -1,7 +1,11 @@
+import { useState } from "react";
 import Navbar from "./Navbar";
 import { GoogleLogin } from "@react-oauth/google";
+import { login } from "../../api";
 const Landing = () => {
   const responseMessage = (response) => {
+    const resGet = login(response.credential, response.clientId);
+    console.log(resGet);
     console.log(response);
   };
   const errorMessage = (error) => {
@@ -12,6 +16,8 @@ const Landing = () => {
       <Navbar></Navbar>
       <div className="Anurag">
         <GoogleLogin onSuccess={responseMessage} onError={errorMessage} />
+
+        {/* <button onClick={() => login()}>Sign in with Google 🚀 </button> */}
       </div>
     </>
   );
