@@ -1,0 +1,9 @@
+.Btn {
+  text-align: center;
+  background-color: rgb(133, 131, 241);
+}
+.Anurag {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
