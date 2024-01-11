@@ -5,13 +5,16 @@ import { login } from "../../api";
 const Landing = () => {
   const responseMessage = (response) => {
     const resGet = login(response.credential, response.clientId);
+    console.log(response);
     resGet.then((res) => {
-      console.log(res);
+      const token = res.data.token;
+      localStorage.setItem("token", token);
     });
   };
   const errorMessage = (error) => {
     console.log(error);
   };
+
   return (
     <>
       <Navbar></Navbar>
