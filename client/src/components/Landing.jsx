@@ -5,8 +5,9 @@ import { login } from "../../api";
 const Landing = () => {
   const responseMessage = (response) => {
     const resGet = login(response.credential, response.clientId);
-    console.log(resGet);
-    console.log(response);
+    resGet.then((res) => {
+      console.log(res);
+    });
   };
   const errorMessage = (error) => {
     console.log(error);

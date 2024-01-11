@@ -5,7 +5,6 @@ const router = express.Router();
 
 router.post("/login", async (req, res) => {
   try {
-    console.log("YES");
     const { id: clientId, cred: credential } = req.body;
     const client = new OAuth2Client(clientId);
     const ticket = await client.verifyIdToken({
