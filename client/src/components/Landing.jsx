@@ -21,8 +21,6 @@ const Landing = () => {
       <Navbar></Navbar>
       <div className="Anurag">
         <GoogleLogin onSuccess={responseMessage} onError={errorMessage} />
-
-        {/* <button onClick={() => login()}>Sign in with Google 🚀 </button> */}
       </div>
     </>
   );
