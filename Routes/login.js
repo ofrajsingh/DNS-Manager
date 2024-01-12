@@ -17,8 +17,14 @@ router.post("/login", async (req, res) => {
   }
   const token = extractToken(req.headers.authorization);
   let isVerified = false;
+  if(token){
+    const decodedToken = jwt.verify(token, process.env.KEY);
+    const existingUser = await User.findOne({ email: decodedToken.email });
+    console.log(existingUser);
+  }
   if (token) isVerified = jwt.verify(token, process.env.KEY);
   if (isVerified) {
+
   } else {
     try {
       const { id: clientId, cred: credential } = req.body;
@@ -29,23 +35,21 @@ router.post("/login", async (req, res) => {
       });
 
       const payload = ticket.getPayload();
-      console.log(payload);
       const firstName= payload.given_name;
       const lastName= payload.family_name;
       const email= payload.email;
 
-      const newUser = new User({
-        firstName,
-        lastName,
-        email,
-      });
+      // const newUser = new User({
+      //   firstName,
+      //   lastName,
+      //   email,
+      // });
 
-      await newUser.save();
+      // await newUser.save();
 
       //generating token
       const token = jwt.sign(payload, process.env.KEY);
 
-      console.log(payload);
       res.status(200).json({ success: true, payload, token });
     } catch (error) {
       console.error("Error during login:", error);
