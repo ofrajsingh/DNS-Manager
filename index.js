@@ -34,8 +34,9 @@ const connectDB = async () => {
     console.error(err);
   }
 };
-// Call connectDB function to establish the database connection
 connectDB();
+// Call connectDB function to establish the database connection
+
 
 app.get("/", (req, res) => {
   res.send("WORKING FINE");

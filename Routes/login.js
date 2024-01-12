@@ -1,6 +1,7 @@
 import express from "express";
 import { OAuth2Client } from "google-auth-library";
 import jwt from "jsonwebtoken";
+import User from '../models/User.js';
 
 const router = express.Router();
 
@@ -28,6 +29,18 @@ router.post("/login", async (req, res) => {
       });
 
       const payload = ticket.getPayload();
+      console.log(payload);
+      const firstName= payload.given_name;
+      const lastName= payload.family_name;
+      const email= payload.email;
+
+      const newUser = new User({
+        firstName,
+        lastName,
+        email,
+      });
+
+      await newUser.save();
 
       //generating token
       const token = jwt.sign(payload, process.env.KEY);
