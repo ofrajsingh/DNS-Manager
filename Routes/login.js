@@ -46,8 +46,7 @@ router.post("/login", async (req, res) => {
                 lastName,
                 email,
               });
-              const savedData = await newUser.save();
-              console.log(savedData);
+              await newUser.save();
             }
             res.status(200).json({ success: true, token });
           } catch (error) {
@@ -73,8 +72,7 @@ router.post("/login", async (req, res) => {
           lastName,
           email,
         });
-        const savedData = await newUser.save();
-        console.log(savedData);
+        await newUser.save();
       }
 
       //generating token

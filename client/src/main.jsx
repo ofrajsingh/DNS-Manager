@@ -5,6 +5,7 @@ import { GoogleOAuthProvider } from "@react-oauth/google";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ErrorPage from "./components/ErrorPage.jsx";
 import Landing from "./components/Landing.jsx";
+import Home from "./components/HomePage.jsx";
 
 import "./index.css";
 
@@ -13,7 +14,10 @@ const router = createBrowserRouter([
     path: "/",
     element: <App />,
     errorElement: <ErrorPage />,
-    children: [{ path: "login", element: <Landing /> }],
+    children: [
+      { path: "login", element: <Landing /> },
+      { path: "/home", element: <Home /> },
+    ],
   },
 ]);
 
