@@ -1,9 +1,27 @@
-.Btn {
-  text-align: center;
-  background-color: rgb(133, 131, 241);
+.app {
+  width: 100vw;
+  height: 100vh;
 }
-.Anurag {
+
+.landing {
+  margin: 2rem;
+  gap: 8rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.googleBtn {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.navbar {
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: blueviolet;
 }
