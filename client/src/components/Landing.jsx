@@ -5,12 +5,16 @@ import { login } from "../../api";
 const Landing = () => {
   const responseMessage = (response) => {
     const resGet = login(response.credential, response.clientId);
-    // console.log(response);
-    resGet.then((res) => {
-      console.log(res);
-      const token = res.data.token;
-      localStorage.setItem("token", token);
-    });
+    resGet
+      .then((res) => {
+        const token = res.data.token;
+        localStorage.setItem("token", token);
+      })
+      .catch((err) => {
+        localStorage.removeItem("token"); //expired or invalid token
+        alert("Token Expired or invalid");
+        window.location.reload();
+      });
   };
   const errorMessage = (error) => {
     console.log(error);
