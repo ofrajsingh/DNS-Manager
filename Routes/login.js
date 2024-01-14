@@ -32,13 +32,12 @@ router.post("/login", async (req, res) => {
       if (err) {
         res.status(401).json({ mssg: err });
       } else {
+        const firstName = payload.given_name;
+        const lastName = payload.family_name;
+        const email = payload.email;
         const token = jwt.sign(payload, process.env.KEY);
         if (decodedToken.email !== payload.email) {
           try {
-            const firstName = payload.given_name;
-            const lastName = payload.family_name;
-            const email = payload.email;
-
             const existingUser = await User.findOne({ email });
             if (!existingUser) {
               const newUser = new User({
@@ -48,7 +47,7 @@ router.post("/login", async (req, res) => {
               });
               await newUser.save();
             }
-            res.status(200).json({ success: true, token });
+            res.status(200).json({ success: true, token, firstName, lastName });
           } catch (error) {
             console.error("Error during login:", error);
             res
@@ -56,7 +55,12 @@ router.post("/login", async (req, res) => {
               .json({ success: false, error: "Invalid credentials" });
           }
         } else {
-          res.status(200).json({ mssg: "Successfully logged In", token });
+          res.status(200).json({
+            mssg: "Successfully logged In",
+            token,
+            firstName,
+            lastName,
+          });
         }
       }
     });
@@ -78,7 +82,7 @@ router.post("/login", async (req, res) => {
       //generating token
       const token = jwt.sign(payload, process.env.KEY);
 
-      res.status(200).json({ success: true, token });
+      res.status(200).json({ success: true, token, firstName, lastName });
     } catch (error) {
       console.error("Error during login:", error);
       res.status(401).json({ success: false, error: "Invalid credentials" });

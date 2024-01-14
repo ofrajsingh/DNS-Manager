@@ -1,11 +1,11 @@
 import { GoogleLogin } from "@react-oauth/google";
 import { login } from "../../api";
 import { useNavigate } from "react-router-dom";
-import userDetail from "../context/UserDetailContext";
+import UserDetailContext from "../context/UserDetailContext";
 import { useContext } from "react";
 
 function SignInBtn() {
-  const { isLoggedIn, setIsLoggedIn } = useContext(userDetail);
+  const { isLoggedIn, setIsLoggedIn } = useContext(UserDetailContext);
   const navigate = useNavigate();
   const responseMessage = (response) => {
     const resGet = login(response.credential, response.clientId);
@@ -14,11 +14,11 @@ function SignInBtn() {
         const token = res.data.token;
         localStorage.setItem("token", token);
         setIsLoggedIn(true);
-        navigate("/home");
+        navigate("/");
       })
       .catch((err) => {
-        localStorage.removeItem("token"); //expired or invalid token
-        alert("Token Expired or invalid");
+        localStorage.removeItem("token"); //expired or invalid token or server not running
+        alert("Something Went Wrong!");
         window.location.reload();
       });
   };

@@ -14,14 +14,14 @@ const setAuthorizationHeader = () => {
 };
 
 export const login = async (credentials, clientId) => {
-  try {
-    setAuthorizationHeader();
-    const response = await API.post("/login", {
-      cred: credentials,
-      id: clientId,
-    });
-    return response;
-  } catch (error) {
-    console.error("Error during login:", error);
-  }
+  setAuthorizationHeader();
+  return await API.post("/login", {
+    cred: credentials,
+    id: clientId,
+  });
+};
+
+export const auth = async () => {
+  setAuthorizationHeader();
+  return await API.get("/auth");
 };
