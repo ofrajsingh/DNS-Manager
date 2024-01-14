@@ -1,5 +1,5 @@
 import SignInBtn from "./SignInBtn";
-const Landing = () => {
+const Login = () => {
   return (
     <div className="landing">
       <h2>Please login or register</h2>
@@ -8,4 +8,4 @@ const Landing = () => {
   );
 };
 
-export default Landing;
+export default Login;

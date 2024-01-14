@@ -1,7 +1,7 @@
 const Navbar = () => {
   return (
     <div className="navbar">
-      <h1>Welcome To DNS Manager</h1>
+      <h1>DNS Manager</h1>
     </div>
   );
 };

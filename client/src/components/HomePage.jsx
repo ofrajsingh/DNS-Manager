@@ -1,5 +1,9 @@
 function Home() {
-  return <div className="home">Welcome UserName</div>;
+  return (
+    <>
+      <div className="home">Welcome UserName</div>;
+    </>
+  );
 }
 
 export default Home;

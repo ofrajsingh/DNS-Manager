@@ -1,20 +1,29 @@
 import "./App.css";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
-import { useEffect, useState } from "react";
+import Login from "./components/Login";
+import Home from "./components/HomePage";
+import PrivateRoute from "./components/PrivateRoute";
 
+import UserDetailContextProvider from "./contextProvider/UserDetailProvider";
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const navigate = useNavigate();
-  useEffect(() => {
-    if (!isLoggedIn) navigate("/login");
-  }, []);
-
   return (
-    <div className="app">
-      <Navbar></Navbar>
-      <Outlet />
-    </div>
+    <UserDetailContextProvider>
+      <div className="app">
+        <Navbar></Navbar>
+        <Routes>
+          <Route path="/login" element={<Login />}></Route>
+          <Route
+            path="/"
+            element={
+              <PrivateRoute>
+                <Home />
+              </PrivateRoute>
+            }
+          ></Route>
+        </Routes>
+      </div>
+    </UserDetailContextProvider>
   );
 }
 
